@@ -11,8 +11,8 @@ A structured Claude Code workflow for **empirically replicating published resear
 ### 1. Clone & Set Up
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/my-ukb-agent.git
-cd my-ukb-agent
+git clone https://github.com/YOUR_USERNAME/paper-replicate-agent-demo.git
+cd paper-replicate-agent-demo
 ```
 
 ### 2. Start Claude Code
