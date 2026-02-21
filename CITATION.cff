@@ -8,5 +8,6 @@ authors:
     affiliation: China Agricultural University
 version: 1.0.0
 date-released: 2026-02-21
+doi: 10.5281/zenodo.18723722
 url: "https://github.com/maxwell2732/paper-replicate-agent-demo"
 license: MIT
