@@ -156,7 +156,11 @@ Every script and report gets a score (0–100). Scores below threshold block the
 
 ---
 
-## UKB Data Setup
+## Data Setup
+
+Create a `data/` directory at the project root and place approved datasets there.
+
+The `data/` folder is intentionally excluded from version control.
 
 1. Place your UKB data extract in `data/` (gitignored — never commit)
 2. Apply the latest participant withdrawal list before any analysis
