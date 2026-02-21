@@ -1,0 +1,64 @@
+# ==============================================================================
+# .gitignore for Academic Claude Code Projects
+# ==============================================================================
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+*.run.xml
+*-blx.bib
+
+# Compiled PDFs (uncomment to track specific PDFs)
+# *.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Rdata
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code local files (not shared across machines)
+.claude/settings.local.json
+.claude/state/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Quarto rendering artifacts
+/.quarto/
+
+# UK Biobank and other sensitive datasets — never commit
+data/
+
+# Replication intermediate outputs (large binary files)
+replications/**/*.parquet
+replications/**/*.pkl
+replications/**/*.rds
+replications/**/results/
+
+# Output artifacts — uncomment lines below based on your preference
+# *.rds
+# output/**/*.rds
