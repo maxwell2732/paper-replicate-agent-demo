@@ -99,15 +99,15 @@ Before any coding:
 
 Document all investigations even if unresolved.
 
-### UK Biobank-Specific Considerations
+### MIMIC-IV-Specific Considerations
 
-- **Field IDs:** Always verify against UKB Data Showcase; field meanings change across instances (baseline vs. repeat assessment)
-- **Withdrawn participants:** Must be excluded using the latest withdrawal list
-- **Assessment centre:** Include as covariate unless paper explicitly excludes it
-- **Genotyping array:** Include as covariate in genetic analyses unless paper excludes
-- **Related individuals:** Apply the paper's stated kinship threshold (typically 3rd-degree, KING > 0.0442)
-- **ICD codes:** Map ICD-9 (pre-2016 HES) and ICD-10 (post-2016) to phenotypes per paper's Supplementary Table
-- **Date of death:** Primary cause vs. any mention — match paper's definition exactly
+- **Key identifiers:** `subject_id` (patient), `hadm_id` (hospital admission), `stay_id` (ICU stay); verify the correct join keys for each table
+- **ICD codes:** Both ICD-9-CM and ICD-10-CM present; always filter on `icd_version` per the paper's specification
+- **Outcome definition:** Verify exact outcome: `hospital_expire_flag` for in-hospital death; 28-day mortality requires date arithmetic from `admittime`; ICU mortality uses `icustays.dod` or `patients.dod`
+- **Time variables:** Dates are shifted per patient — use relative durations (e.g., `dischtime - admittime`), not absolute calendar dates; ensure time-at-risk matches paper definition
+- **Lab/chart values:** Multiple measurements per stay are common; apply the paper's stated aggregation rule (first value, last value, min, max, mean) within the specified time window
+- **Exclusions:** Apply paper's stated exclusion criteria in order (e.g., age < 18, index admission only, missing key variables); document each step's effect on N
+- **Competing risks:** Death in ICU vs. discharge alive is a common competing event; verify whether paper uses cause-specific or subdistribution (Fine-Gray) hazard
 
 ### Replication Report
 
@@ -133,7 +133,7 @@ Save to `replications/[paper_name]/validation_report.md` AND final polished vers
 - **Target:** X | **Investigation:** ... | **Resolution:** ...
 
 ## Environment
-- Python version, R version, key packages (with versions), data source, UKB application ID
+- Python version, R version, key packages (with versions), data source, MIMIC-IV version
 ```
 
 ---

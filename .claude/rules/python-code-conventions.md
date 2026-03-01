@@ -68,7 +68,7 @@ import statsmodels.formula.api as smf
 from lifelines import CoxPHFitter
 
 # Local
-from scripts.utils import load_ukb_extract
+from scripts.utils import load_mimic_extract
 ```
 
 ---
