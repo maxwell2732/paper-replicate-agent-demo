@@ -1,9 +1,9 @@
-# GitHub Copilot Instructions — UKB Empirical Replication Agent
+# GitHub Copilot Instructions — MIMIC-IV Empirical Replication Agent
 
-**Project:** UKB Empirical Replication Agent
+**Project:** MIMIC-IV Empirical Replication Agent
 **Institution:** China Agricultural University
 
-You are assisting with empirical replication of published academic papers using UK Biobank (UKB) data.
+You are assisting with empirical replication of published academic papers using MIMIC-IV data.
 Your role is that of a research contractor: plan the approach, write R/Python scripts, validate outputs
 against published targets, document discrepancies, and report results.
 
@@ -30,7 +30,7 @@ paper-replicate-agent-demo/
 │       ├── supplementary.pdf
 │       ├── *.do / *.R               # Original Stata/R code (if provided)
 │       └── README.md
-├── data/                            # Datasets (gitignored — sensitive UKB data)
+├── data/                            # Datasets (gitignored — sensitive MIMIC-IV data)
 ├── replications/                    # Our replication scripts and outputs
 │   └── [PaperName]/
 │       ├── R/replicate.R
@@ -234,21 +234,46 @@ OKABE_ITO = ["#E69F00", "#56B4E9", "#009E73", "#F0E442",
 
 ---
 
-## UK Biobank-Specific Considerations
+## MIMIC-IV-Specific Considerations
 
-- **Data location:** `data/` — gitignored; never commit UKB data
-- **Application ID:** Update `[YOUR UKB APPLICATION ID]` in this file to your actual UKB application number (e.g., `12345`). This is required for any UKB-linked analyses.
-- **Withdrawal list:** Always apply the latest participant withdrawal list before any analysis
-- **Field IDs:** Verify all field IDs against the [UKB Data Showcase](https://biobank.ndph.ox.ac.uk/showcase/); note instance (baseline vs. repeat)
-- **ICD codes:** Map ICD-9 (pre-2016 HES) and ICD-10 (post-2016) per paper's Supplementary Table
-- **Assessment centre:** Include as covariate unless paper explicitly excludes it
-- **Related individuals:** Apply the paper's stated kinship threshold (typically 3rd-degree, KING > 0.0442)
+- **Data location:** `data/` — gitignored; never commit MIMIC-IV data
+- **Access:** PhysioNet Data Use Agreement + CITI training required; see [physionet.org/content/mimiciv](https://physionet.org/content/mimiciv/)
+- **Key identifiers:** `subject_id` (patient), `hadm_id` (hospital admission), `stay_id` (ICU stay in `icu/icustays`)
+- **Core modules used:** `hosp/` (admissions, patients, diagnoses_icd, labevents, prescriptions) and `icu/` (icustays, chartevents, outputevents)
+- **ICD codes:** Both ICD-9-CM (`icd_version = 9`) and ICD-10-CM (`icd_version = 10`) present; always filter by version per paper's specification
+- **Time variables:** Use `admittime`/`dischtime` for hospital LOS; `intime`/`outtime` for ICU LOS; dates are shifted per patient — use relative durations, not calendar dates
+- **Outcomes:** Verify outcome definition: `hospital_expire_flag` (in-hospital death in `admissions`), 28-day mortality requires date arithmetic from `admittime`
+- **Lab/chart values:** Multiple measurements per stay are common; apply the paper's stated aggregation rule (first value, last value, min, max, or mean within a time window)
+- **Exclusions:** Apply paper's stated exclusions in order (e.g., age < 18, re-admissions, missing key variables); document each step's effect on N
+
+### PostgreSQL Connection (R)
+
+MIMIC-IV is hosted in a local PostgreSQL instance. Use the `data-collector` agent (`.claude/agents/data-collector.md`) to extract tables. The standard R connection is:
+
+```r
+library(DBI)
+library(RPostgres)
+
+con <- dbConnect(
+  RPostgres::Postgres(),
+  dbname   = "mimiciv",
+  host     = "localhost",
+  port     = 5432,
+  user     = "postgres",
+  password = Sys.getenv("MIMIC_DB_PASSWORD", unset = "hello")
+)
+```
+
+**Read-only rule:** Only `SELECT` queries are permitted. The `data-collector` agent enforces this; replication scripts must also never call `INSERT`, `UPDATE`, `DELETE`, or any DDL on this connection.
 
 ---
 
 ## Commands
 
 ```bash
+# Collect data from MIMIC-IV PostgreSQL into data/
+Rscript scripts/R/collect_data.R
+
 # Run R replication script
 Rscript replications/[PaperName]/R/replicate.R
 
@@ -265,7 +290,7 @@ python scripts/quality_score.py replications/[PaperName]/R/replicate.R
 
 | Paper | Status | Notes |
 |-------|--------|-------|
-| Gracner et al. (2024) | IN PROGRESS | Sugar tax, UKB; partial replication (some controls omitted) |
+| *(add your study here)* | — | MIMIC-IV |
 
 ---
 

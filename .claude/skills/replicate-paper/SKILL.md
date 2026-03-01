@@ -2,14 +2,14 @@
 
 **Trigger:** `/replicate-paper [paper.pdf] [data.csv|dta]` or "replicate this paper"
 
-**Purpose:** Full 6-phase autonomous replication of a biomedical/epidemiology paper using UK Biobank or similar data. Produces Python and R scripts plus a polished validation report.
+**Purpose:** Full 6-phase autonomous replication of a biomedical/epidemiology paper using MIMIC-IV or similar clinical database data. Produces Python and R scripts plus a polished validation report.
 
 ---
 
 ## Invocation
 
 ```
-/replicate-paper papers/AuthorYear.pdf data/ukb_extract.csv
+/replicate-paper papers/AuthorYear.pdf data/mimic_extract.csv
 ```
 
 Or with just: "replicate this paper" (Claude will ask for paths if not provided).
@@ -196,7 +196,7 @@ Report structure:
 ## Reproducibility
 - Python: X.Y.Z | pandas X.X | statsmodels X.X | lifelines X.X
 - R: X.Y.Z | survival X.X | fixest X.X
-- Data: [filename, UKB application ID if applicable]
+- Data: [filename, MIMIC-IV version (e.g., v2.2)]
 - Seed: YYYYMMDD
 ```
 

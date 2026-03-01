@@ -31,6 +31,7 @@ __pycache__/
 .Rhistory
 .RData
 .Rdata
+.Renviron
 
 # OS files
 .DS_Store
@@ -50,7 +51,7 @@ Thumbs.db
 # Quarto rendering artifacts
 /.quarto/
 
-# UK Biobank and other sensitive datasets — never commit
+# MIMIC-IV and other sensitive datasets — never commit
 data/
 
 # Replication intermediate outputs (large binary files)

@@ -1,10 +1,10 @@
-# Project Reference — UKB Empirical Replication Agent
+# Project Reference — MIMIC-IV Empirical Replication Agent
 
 > **Note:** This repository now uses **GitHub Copilot** as the primary AI assistant.
 > The main instructions file for Copilot is `.github/copilot-instructions.md`.
 > This file is kept as a project reference document.
 
-**Project:** UKB Empirical Replication Agent
+**Project:** MIMIC-IV Empirical Replication Agent
 **Institution:** China Agricultural University
 **Branch:** main
 
@@ -23,7 +23,7 @@
 ## Folder Structure
 
 ```
-my-ukb-agent/
+paper-replicate-agent-demo/
 ├── CLAUDE.md                    # This file
 ├── .claude/                     # Rules, skills, agents, hooks
 ├── papers/                      # Source PDFs and original replication packages
@@ -32,7 +32,7 @@ my-ukb-agent/
 │       ├── supplementary.pdf
 │       ├── *.do / *.R           # Original Stata/R code (if provided)
 │       └── README.md
-├── data/                        # Datasets (gitignored — sensitive UKB data)
+├── data/                        # Datasets (gitignored — sensitive MIMIC-IV data)
 ├── replications/                # Our replication scripts and outputs
 │   └── [PaperName]/
 │       ├── R/replicate.R
@@ -62,6 +62,9 @@ my-ukb-agent/
 ## Commands
 
 ```bash
+# Collect data from MIMIC-IV PostgreSQL into data/
+Rscript scripts/R/collect_data.R
+
 # Run R replication script
 Rscript replications/[PaperName]/R/replicate.R
 
@@ -102,14 +105,16 @@ python scripts/quality_score.py replications/[PaperName]/R/replicate.R
 
 | Paper | Status | Targets | Pass | Fail | Notes |
 |-------|--------|---------|------|------|-------|
-| Gracner et al. (2024) | IN PROGRESS | — | — | — | Sugar tax, UKB |
+| *(add your study here)* | — | — | — | — | MIMIC-IV |
 
 ---
 
-## UKB Data Notes
+## MIMIC-IV Data Notes
 
 - **Data location:** `data/` (gitignored — sensitive)
-- **Application ID:** [YOUR UKB APPLICATION ID]
-- **Withdrawal list:** Always apply latest withdrawal list before any analysis
-- **Field IDs:** Verify all field IDs against UKB Data Showcase; note instance (baseline vs. repeat)
-- **ICD codes:** Map ICD-9 (pre-2016 HES) and ICD-10 (post-2016) per paper's Supplementary Table
+- **Access:** PhysioNet Data Use Agreement + CITI training required; see [physionet.org/content/mimiciv](https://physionet.org/content/mimiciv/)
+- **Key identifiers:** `subject_id` (patient), `hadm_id` (hospital admission), `stay_id` (ICU stay)
+- **Core modules:** `hosp/` (admissions, diagnoses, labs, prescriptions) and `icu/` (icustays, chartevents)
+- **ICD codes:** Both ICD-9-CM and ICD-10-CM used; verify with `diagnoses_icd` `icd_version` column
+- **Time variables:** Use `admittime`/`dischtime` for hospital stay; `intime`/`outtime` for ICU stay
+- **De-identification:** Dates are shifted per patient; use relative times, not absolute calendar dates

@@ -1,8 +1,8 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18723722.svg)](https://doi.org/10.5281/zenodo.18723722)
 
-# UKB Empirical Replication Agent
+# MIMIC-IV Empirical Replication Agent
 
-A structured **GitHub Copilot** workflow for **empirically replicating published research** using UK Biobank (UKB) data, created by 朱晨 | 遗传社科研究. You describe a paper; Copilot plans the replication approach, writes R/Python scripts, validates outputs against published targets, documents discrepancies, and reports results — like a research contractor who handles the full pipeline.
+A structured **GitHub Copilot** workflow for **empirically replicating published research** using MIMIC-IV data, created by 朱晨 | 遗传社科研究. You describe a paper; Copilot plans the replication approach, writes R/Python scripts, validates outputs against published targets, documents discrepancies, and reports results — like a research contractor who handles the full pipeline.
 
 ---
 
@@ -23,7 +23,7 @@ Open the repository in VS Code and ensure the **GitHub Copilot** extension is in
 
 Open **Copilot Chat** and paste a prompt like:
 
-> I want to replicate [Paper Author (Year)]. The PDF is in `papers/[PaperName]/`. The relevant UKB data is in `data/`. Please read the paper, identify all empirical targets, and plan the replication.
+> I want to replicate [Paper Author (Year)]. The PDF is in `papers/[PaperName]/`. The relevant MIMIC-IV data is in `data/`. Please read the paper, identify all empirical targets, and plan the replication.
 
 **What this does:** Copilot reads `.github/copilot-instructions.md` and the paper, inventories the available data, identifies every table and figure to replicate, drafts a step-by-step plan, waits for your approval, then implements — running scripts, verifying outputs against tolerance thresholds, and saving a validation report.
 
@@ -53,7 +53,7 @@ When asking Copilot to review work, you can request it take on one of these role
 | Role | What It Does |
 |------|-------------|
 | `domain-reviewer` | Senior epidemiology referee (NEJM/Lancet/IJE standard) — checks causal assumptions, methods, code-theory alignment |
-| `r-reviewer` | R code quality, reproducibility, and UKB-specific correctness |
+| `r-reviewer` | R code quality, reproducibility, and domain correctness |
 | `proofreader` | Grammar, typos, consistency in reports |
 | `verifier` | End-to-end task completion verification |
 
@@ -79,13 +79,14 @@ Every script and report gets a score (0–100). Scores below threshold block the
 ## What's Included
 
 <details>
-<summary><strong>4 review roles, 10 workflow prompts, 13 reference guides, 6 templates</strong> (click to expand)</summary>
+<summary><strong>5 review roles, 10 workflow prompts, 13 reference guides, 6 templates</strong> (click to expand)</summary>
 
 ### Review Roles (`.claude/agents/` — reference docs)
 
 | Role | What It Does |
 |------|-------------|
-| `domain-reviewer` | Epidemiology substance review (causal assumptions, methods, UKB specifics) |
+| `data-collector` | Read-only MIMIC-IV data extraction via PostgreSQL; saves tables to `data/` |
+| `domain-reviewer` | Epidemiology substance review (causal assumptions, methods, MIMIC-IV specifics) |
 | `r-reviewer` | R code quality, reproducibility, and domain correctness |
 | `proofreader` | Grammar, typos, overflow, consistency review |
 | `verifier` | End-to-end task completion verification |
@@ -114,13 +115,13 @@ Every script and report gets a score (0–100). Scores below threshold block the
 | `session-logging` | Logging triggers: post-plan, incremental, end-of-session |
 | `replication-protocol` | 6-phase replication + Stata→R/Python pitfalls |
 | `quality-gates` | 80/90/95 scoring rubrics + tolerance thresholds |
-| `r-code-conventions` | R coding standards, reproducibility, UKB pitfalls |
+| `r-code-conventions` | R coding standards, reproducibility, MIMIC-IV pitfalls |
 | `python-code-conventions` | Python scientific coding standards |
 | `orchestrator-research` | Simplified orchestrator for exploratory research |
 | `verification-protocol` | Replication task completion checklist |
 | `pdf-processing` | Safe large PDF handling |
 | `proofreading-protocol` | Propose-first, then apply with approval |
-| `knowledge-base-template` | UKB field registry, estimand registry, pitfalls |
+| `knowledge-base-template` | MIMIC-IV variable registry, estimand registry, pitfalls |
 | `exploration-fast-track` | Lightweight exploration workflow (60/100 threshold) |
 
 ### Templates (`templates/`)
@@ -156,19 +157,19 @@ Create a `data/` directory at the project root and place approved datasets there
 
 The `data/` folder is intentionally excluded from version control.
 
-1. Place your UKB data extract in `data/` (gitignored — never commit)
-2. Apply the latest participant withdrawal list before any analysis
-3. Update your UKB Application ID in `.github/copilot-instructions.md`
-4. Verify field IDs against the [UKB Data Showcase](https://biobank.ndph.ox.ac.uk/showcase/)
+1. Complete CITI training and sign the PhysioNet Data Use Agreement to obtain MIMIC-IV access
+2. Place your MIMIC-IV data files in `data/` (gitignored — never commit)
+3. MIMIC-IV modules used: `hosp/` (core hospital tables), `icu/` (ICU stay tables)
+4. Verify table schemas against the [MIMIC-IV documentation](https://mimic.mit.edu/docs/iv/)
 
 ---
 
 ## Folder Structure
 
 ```
-my-ukb-agent/
+paper-replicate-agent-demo/
 ├── papers/           # PDFs + original replication packages
-├── data/             # UKB data (gitignored)
+├── data/             # MIMIC-IV data (gitignored)
 ├── replications/     # Our R/Python replication scripts + outputs
 ├── reports/          # Polished final reports
 ├── quality_reports/  # Plans, specs, session logs, replication targets
