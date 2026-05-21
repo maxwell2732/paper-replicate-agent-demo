@@ -1,0 +1,18 @@
+encoding_id	value	meaning	showcase_order
+13	-3	Preferred not to answer	2
+13	-1	Date uncertain or unknown	1
+488	-1001	Less than one year	1
+909	0	Measure invalid	1
+1317	-999999	Measure not cleanly recoverable from data	1
+2360	-9999999	empty or non-numeric value/unit	6
+2360	-9000099	associated with empty or 0 clinical code	5
+2360	-9000004	redacted - incorrect READ2	4
+2360	-9000003	redacted - incorrect SNOMED	3
+2360	-9000002	redacted - rare occupation	2
+2360	-9000001	redacted - potentially sensitive or identifying	1
+5702	-9999999	empty or non-numeric value	5
+5702	-9000002	redacted - rare occupation	4
+5702	-9000001	redacted - potentially sensitive or identifying	3
+5702	-2	redacted - rare occupation	2
+5702	-1	redacted - potentially sensitive or identifying	1
+7667	-99999	Not computed	1

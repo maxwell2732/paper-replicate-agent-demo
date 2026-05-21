@@ -31,14 +31,12 @@ my-ukb-agent/
 ├── data/                        # Datasets (gitignored — sensitive UKB data)
 ├── replications/                # Our replication scripts and outputs
 │   └── [PaperName]/
-│       ├── R/replicate.R
-│       ├── R/figures/
-│       ├── R/results/
-│       ├── python/replicate.py  # (if Python replication needed)
+│       ├── R/replicate.R        # Runnable R replication script
+│       ├── figures/             # All output figures (PNG/PDF)
+│       ├── tables/              # All output tables (CSV)
 │       └── validation_report.md
 ├── reports/                     # Polished final replication reports
 ├── scripts/                     # Utility scripts (quality_score.py, helpers)
-│   └── R/                       # Shared R utility functions
 ├── quality_reports/             # Plans, session logs, replication targets
 │   ├── plans/
 │   ├── specs/
@@ -47,9 +45,6 @@ my-ukb-agent/
 │   └── [Paper]_replication_targets.md
 ├── explorations/                # Exploratory analysis sandbox
 │   └── ARCHIVE/
-├── master_supporting_docs/      # Methodology reference papers and slides
-│   ├── supporting_papers/
-│   └── supporting_slides/
 └── templates/                   # Session log, quality report templates
 ```
 

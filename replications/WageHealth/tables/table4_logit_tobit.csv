@@ -1,0 +1,8 @@
+model,term,coef,se,t_stat,p_value,N,R2
+Logit(1),log_minwage,-0.7416,0.5042,-1.471,0.1413,22502,NA
+Logit(1),log_minwage:post2004,0.8034,0.4361,1.842,0.0655,22502,NA
+Logit(2),log_minwage,-0.824,0.514,-1.603,0.1089,22408,NA
+Logit(2),male,-0.1278,0.0601,-2.128,0.0334,22408,NA
+Logit(2),log_age,1.1206,0.1177,9.523,0,22408,NA
+Logit(2),edu_years,-0.0182,0.0085,-2.126,0.0335,22408,NA
+Logit(2),log_minwage:post2004,0.8421,0.4465,1.886,0.0593,22408,NA

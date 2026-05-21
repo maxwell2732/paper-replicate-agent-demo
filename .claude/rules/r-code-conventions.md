@@ -58,12 +58,21 @@ theme_custom <- function(base_size = 14) {
 ggsave(filepath, width = 12, height = 5, bg = "transparent")
 ```
 
-## 5. RDS Data Pattern
+## 5. Replication Output Pattern
 
-**Heavy computations saved as RDS; slide rendering loads pre-computed data.**
+**Figures** go to `replications/[paper_name]/figures/`, **tables** go to `replications/[paper_name]/tables/`.
 
 ```r
-saveRDS(result, file.path(out_dir, "descriptive_name.rds"))
+figures_dir <- here("replications", "[paper_name]", "figures")
+tables_dir  <- here("replications", "[paper_name]", "tables")
+dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(tables_dir,  recursive = TRUE, showWarnings = FALSE)
+
+# Save a figure
+ggsave(file.path(figures_dir, "fig1_event_study.png"), plot = p, width = 10, height = 6, dpi = 300)
+
+# Save a table
+write_csv(results_df, file.path(tables_dir, "table1_main.csv"))
 ```
 
 ## 6. Common Pitfalls

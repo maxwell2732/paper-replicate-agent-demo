@@ -1,0 +1,7 @@
+model,term,coef,se,t_stat,p_value,N,R2
+Rural(1),log_minwage,0.0115,0.0278,0.414,0.679,16022,0.0517
+Rural_DID(2),log_minwage,-0.024,0.0331,-0.725,0.4686,16022,0.0522
+Rural_DID(2),log_minwage:post2004,0.0632,0.0317,1.995,0.0461,16022,0.0522
+Urban(3),log_minwage,-0.0953,0.047,-2.028,0.0425,7029,0.0354
+Urban_DID(4),log_minwage,-0.1377,0.0497,-2.769,0.0056,7029,0.0358
+Urban_DID(4),log_minwage:post2004,0.0676,0.0349,1.934,0.0531,7029,0.0358

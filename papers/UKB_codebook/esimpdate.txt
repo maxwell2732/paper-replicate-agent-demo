@@ -1,0 +1,19 @@
+encoding_id	value	meaning	showcase_order
+272	1900-01-01	Date is unknown	1
+586	1910-01-01	Prefer not to answer	1
+586	1920-01-01	Do not know	2
+586	1930-01-01	Not applicable	3
+691	1910-01-01	Prefer not to answer	1
+691	1920-01-01	Do not know	2
+819	1900-01-01	Code has no event date	1
+819	1901-01-01	Code has event date before participant's date of birth	2
+819	1902-02-02	Code has event date matching participant's date of birth	3
+819	1903-03-03	Code has event date after participant's date of birth and falls in the same calendar year as date of birth	4
+819	1909-09-09	Code has event date in the future and is presumed to be a place-holder or other system default	5
+819	2037-07-07	Code has event date in the future and is presumed to be a place-holder or other system default	6
+1273	1900-01-01	Date is unknown	1
+1273	1999-01-01	Date is invalid	2
+1313	1904-04-04	Date in or before calendar year of birth	1
+1345	1900-01-01	after test sample received by laboratory	2
+1345	1902-01-01	before kit despatched	1
+1642	1999-01-01	Data returned via post	1

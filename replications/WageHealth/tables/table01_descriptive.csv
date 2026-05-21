@@ -1,0 +1,9 @@
+variable,label,n,mean,sd,min,max
+sick,Sick (past 4 weeks),23051,0.0804,0.272,0,1
+log_minwage,log(Monthly min wage),23051,5.8289,0.29,5.4596,6.3801
+male,Male,23051,0.5559,0.4969,0,1
+age_use,Age,23051,41.306,10.6584,16,60
+edu_years,"Education (years, mapped from a12)",23051,8.6936,3.9706,0,16
+lowedu,"Low education (≤middle school, a12≤2)",23051,0.6973,0.4594,0,1
+nonSOE,"Non-SOE firm (b6∈{5,6,7,8})",23051,0.4602,0.4984,0,1
+urban,Urban resident (t2=1),23051,0.3049,0.4604,0,1

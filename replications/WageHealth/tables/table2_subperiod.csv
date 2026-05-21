@@ -1,0 +1,5 @@
+model,term,coef,se,t_stat,p_value,N,R2
+Post04_commFE,log_minwage,0.0203,0.0332,0.61,0.5418,12714,0.0552
+Post04_indivFE,log_minwage,0.0093,0.0384,0.243,0.8079,9103,0.4802
+Late_commFE,log_minwage,0.0176,0.051,0.346,0.7297,8563,0.0689
+Late_indivFE,log_minwage,-0.0014,0.0556,-0.024,0.9805,4674,0.5378

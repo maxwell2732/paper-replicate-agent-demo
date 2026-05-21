@@ -1,0 +1,4 @@
+encoding_id	value	meaning	showcase_order
+439	1900-01-01T00:00:00	Not performed	1
+1439	1900-01-01T00:00:00	Time is unknown	0
+1439	1999-01-01T00:00:00	Time is invalid	0

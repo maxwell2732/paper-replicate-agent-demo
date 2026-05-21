@@ -1,0 +1,7 @@
+step,n
+0. Raw merged dataset,57203
+1. Waves 1997/2000/2004/2006/2009,37655
+2. Employed (b2=1),29099
+3. Age 16–60 (men) / 16–55 (women),23328
+4. Non-missing sick (M23 ≠ 9),23147
+"5. Non-missing controls (age, edu, gender)",23051

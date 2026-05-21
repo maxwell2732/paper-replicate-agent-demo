@@ -75,35 +75,6 @@ Or with just: "replicate this paper" (Claude will ask for paths if not provided)
 - Comment every non-obvious Stata→Python or Stata→R translation decision
 - Refer to `replication-protocol.md` translation pitfall tables
 
-**Python script:** `replications/[paper_name]/python/replicate.py`
-
-Structure:
-```python
-# Replication: [Paper Author (Year)]
-# Date: YYYY-MM-DD
-# Original: Stata / R
-# Python version: X.Y.Z
-# Key packages: pandas X.X, statsmodels X.X, lifelines X.X
-
-from pathlib import Path
-import random
-import numpy as np
-import pandas as pd
-# ... other imports
-
-random.seed(YYYYMMDD)
-np.random.seed(YYYYMMDD)
-
-DATA_DIR = Path(__file__).parents[3] / "data"
-RESULTS_DIR = Path(__file__).parent / "results"
-RESULTS_DIR.mkdir(exist_ok=True)
-
-# --- 1. Load Data ---
-# --- 2. Sample Construction ---
-# --- 3. Model Fitting ---
-# --- 4. Save Results ---
-```
-
 **R script:** `replications/[paper_name]/R/replicate.R`
 
 Structure:
@@ -121,21 +92,23 @@ library(survival)
 
 set.seed(YYYYMMDD)
 
-data_dir <- here("data")
-results_dir <- here("replications", "[paper_name]", "R", "results")
-dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
+data_dir   <- here("data")
+figures_dir <- here("replications", "[paper_name]", "figures")
+tables_dir  <- here("replications", "[paper_name]", "tables")
+dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
+dir.create(tables_dir,  recursive = TRUE, showWarnings = FALSE)
 
 # --- 1. Load Data ---
 # --- 2. Sample Construction ---
 # --- 3. Model Fitting ---
-# --- 4. Save Results ---
+# --- 4. Save Figures → figures_dir ---
+# --- 5. Save Tables  → tables_dir  ---
 ```
 
 **Outputs:**
-- `replications/[paper_name]/python/replicate.py`
-- `replications/[paper_name]/R/replicate.R`
-- `replications/[paper_name]/python/results/` (parquet/pkl files)
-- `replications/[paper_name]/R/results/` (rds files)
+- `replications/[paper_name]/R/replicate.R`   — runnable R script
+- `replications/[paper_name]/figures/`         — PNG/PDF figures
+- `replications/[paper_name]/tables/`          — CSV tables
 
 ---
 
@@ -143,8 +116,8 @@ dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
 
 **Goal:** Run both scripts and compare results to gold standard targets.
 
-1. Execute Python script: `python replications/[paper_name]/python/replicate.py`
-2. Execute R script: `Rscript replications/[paper_name]/R/replicate.R`
+1. Execute R script: `Rscript replications/[paper_name]/R/replicate.R`
+2. Confirm `figures/` and `tables/` are populated under `replications/[paper_name]/`
 3. Load results; compare to targets using tolerance thresholds from `replication-protocol.md`:
    - Integers: exact
    - Point estimates: ±0.01
@@ -212,7 +185,7 @@ After Phase 6, score the output. Minimum 80/100 to commit.
 
 **Auto-commit if score >= 80:**
 ```
-git add replications/[paper_name]/ reports/[paper_name]_replication_report.md quality_reports/[paper_name]_*.md
+git add replications/[paper_name]/R/ replications/[paper_name]/figures/ replications/[paper_name]/tables/ replications/[paper_name]/validation_report.md reports/[paper_name]_replication_report.md quality_reports/[paper_name]_*.md
 git commit -m "Replicate [Paper Author (Year)] -- [VERDICT]: N/Total targets matched"
 ```
 
