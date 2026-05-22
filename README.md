@@ -24,7 +24,6 @@ You describe a paper; Claude plans the replication approach, writes R scripts, v
 | van den Berg et al. (2025) | UKB | COMPLETE | Prenatal sugar derationing → education |
 | 江求川、张克中 (2013) | CHNS 2006 | PARTIAL | Female height income premium replicated |
 | 工资制度变化与员工效用 | CHNS | PARTIAL | DID wage coefficient matched |
-| Gracner et al. (2024) | UKB | IN PROGRESS | Sugar tax effects |
 
 ---
 
