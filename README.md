@@ -1,6 +1,10 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18723722.svg)](https://doi.org/10.5281/zenodo.18723722)
 
-# Paper Replication Agent
+# Paper Replication Agent | Claude Code 论文复现工作流
+
+**作者：** 朱 晨 | 遗传社科研究 Chen Zhu | China Agricultural University (CAU)
+
+**最后更新：** 2026-05-22
 
 **Tutorial:**
 
@@ -41,7 +45,7 @@ You describe a paper; Claude plans the replication approach, writes R scripts, v
 |------|------|
 | **0. 论文解析** | 读取 PDF，提取所有实证目标（回归系数、样本量、显著性）到 `replication_targets.md` |
 | **1. 数据审核** | 核查样本构成是否与论文描述一致（N、变量定义、纳入/排除标准） |
-| **2. 脚本翻译** | 将论文方法（含 Stata 原始代码）转写为可运行的 R 脚本，严格对齐原始设定 |
+| **2. 代码撰写** | 将论文方法转写为可运行的 R 脚本，严格对齐原始设定 |
 | **3. 结果验证** | 将输出与目标值逐一比对，按容差阈值判定 PASS / NEAR / FAIL |
 | **4. 差异记录** | 对每个 NEAR/FAIL 结果进行溯源分析，记录尝试方案和最终解释 |
 | **5. 复现报告** | 保存 `validation_report.md`，包含完整的方法说明与结果对比表 |
@@ -60,14 +64,9 @@ You describe a paper; Claude plans the replication approach, writes R scripts, v
 
 1. **计划先行**：每次任务前进入计划模式，列出复现步骤并等待确认，避免盲目执行
 2. **严格对标**：逐表、逐列记录目标值，结果差异有据可查
-3. **Stata → R 转换**：内置常见陷阱提示（cluster SE、固定效应吸收、权重处理等）
+3. **可运行 R 代码**：生成可供运行的 R 代码，任何结果有据可查
 4. **质量门控**：80 分提交 / 90 分发布 / 95 分卓越，每次复现都有量化评估
 5. **上下文持久化**：会话压缩后自动恢复进度，长周期复现任务不丢失状态
-
-### 作者
-
-**朱 晨 | 遗传社科研究**  
-Chen Zhu | China Agricultural University (CAU)
 
 ---
 
