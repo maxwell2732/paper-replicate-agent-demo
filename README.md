@@ -2,6 +2,15 @@
 
 # Paper Replication Agent
 
+**Tutorial:**
+
+<p align="center">
+  <a href="https://player.bilibili.com/player.html?isOutside=true&aid=116615526024253&bvid=BV1y8Le6yEKp&cid=38515049945&p=1" target="_blank">
+    <img src="templates/turotial_cover.png" width="30%" alt="Bilibili tutorial">
+  </a>
+</p>
+
+
 A structured Claude Code workflow for **empirically replicating published research**, created by 朱晨 @ China Agricultural University. Currently used with UK Biobank (UKB) and Chinese survey datasets (CHNS, CHARLS). Special thanks to Pedro H. C. Sant'Anna for the claude-code-my-workflow repository, which inspired this workflow.
 
 You describe a paper; Claude plans the replication approach, writes R scripts, validates outputs against published targets, documents discrepancies, and saves a validation report — like a research assistant who handles the full pipeline.
